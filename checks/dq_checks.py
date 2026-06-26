@@ -1,13 +1,26 @@
 import os
 from sqlalchemy import create_engine, text
-from dotenv import load_dotenv
 from datetime import datetime
 
-load_dotenv()
+# Works locally (.env) AND on Streamlit Cloud (st.secrets)
+try:
+    import streamlit as st
+    DB_HOST = st.secrets["DB_HOST"]
+    DB_PORT = st.secrets["DB_PORT"]
+    DB_NAME = st.secrets["DB_NAME"]
+    DB_USER = st.secrets["DB_USER"]
+    DB_PASSWORD = st.secrets["DB_PASSWORD"]
+except Exception:
+    from dotenv import load_dotenv
+    load_dotenv()
+    DB_HOST = os.getenv("DB_HOST")
+    DB_PORT = os.getenv("DB_PORT")
+    DB_NAME = os.getenv("DB_NAME")
+    DB_USER = os.getenv("DB_USER")
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 engine = create_engine(
-    f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
-    f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
 )
 
 def run_check(check_name, sql, threshold, metric_label, baseline_sql=None):
