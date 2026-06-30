@@ -1,6 +1,4 @@
-Here's the full README. Copy this entire block and overwrite `README.md` in your project root.
 
-```markdown
 # 🔍 GenAI Data Quality Explainer
 
 > Automated SQL health checks + LLM-powered root cause analysis — tells you *why* your data broke, not just that it did.
@@ -167,5 +165,5 @@ The second hardest part was infrastructure, not code: getting Streamlit Cloud, N
 ## Author
 
 **Renold Stephen** — M.Tech Computer Science, Christ University, Bangalore
-[GitHub](https://github.com/RenoX23) • 
-```
+[GitHub](https://github.com/RenoX23) •
+
